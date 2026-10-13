@@ -218,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Data (never commit)
+data/private/
+*.hdf5
+
+# IDE
+.idea/
+
+# macOS
+.DS_Store
