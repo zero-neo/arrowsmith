@@ -17,3 +17,19 @@ dev = ["pytest", "ruff", "pre-commit"]
 
 [tool.hatch.version]
 path = "src/arrowsmith/__init__.py"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "NPY", "D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
