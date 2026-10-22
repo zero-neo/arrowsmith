@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from arrowsmith.kinematics import add_velocity
+from arrowsmith.kinematics import add_acceleration, add_velocity
 
 
 def make_track(x, time):
@@ -39,3 +39,31 @@ def test_input_not_modified():
     add_velocity(tracks)
 
     assert "vx" not in tracks.columns
+
+
+def test_constant_acceleration():
+    time = np.arange(7) * 0.1
+    tracks = add_velocity(make_track(x=time**2, time=time))  # a = 2
+
+    result = add_acceleration(tracks)
+
+    assert result["ax"].iloc[:2].isna().all()  # first two frames
+    assert result["ax"].iloc[-2:].isna().all()  # last two frames
+    assert result["ax"].iloc[2:-2].tolist() == pytest.approx([2.0, 2.0, 2.0])
+    assert result["ay"].iloc[2:-2].tolist() == pytest.approx([0.0, 0.0, 0.0])
+
+
+def test_acceleration_does_not_modify_input():
+    time = np.arange(7) * 0.1
+    tracks = add_velocity(make_track(x=time**2, time=time))
+
+    add_acceleration(tracks)
+
+    assert "ax" not in tracks.columns
+
+
+def test_acceleration_needs_velocity():
+    time = np.arange(7) * 0.1
+
+    with pytest.raises(ValueError, match="add_velocity"):
+        add_acceleration(make_track(x=time, time=time))

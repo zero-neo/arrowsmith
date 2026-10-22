@@ -223,6 +223,9 @@ __marimo__/
 data/private/
 *.hdf5
 
+# Generated output
+/figures/
+
 # IDE
 .idea/
 
