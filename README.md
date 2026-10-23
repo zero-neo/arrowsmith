@@ -1,6 +1,7 @@
 # arrowsmith
 
 ![tests](https://github.com/zero-neo/arrowsmith/actions/workflows/tests.yml/badge.svg)
+<img width="1837" height="1534" alt="quiver" src="https://github.com/user-attachments/assets/dc9da0c5-bf0d-4242-802b-ae8919c546d3" />
 
 From trajectories to vector fields to equations.
 
